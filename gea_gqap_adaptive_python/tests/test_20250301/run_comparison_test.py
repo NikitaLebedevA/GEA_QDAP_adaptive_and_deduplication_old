@@ -410,7 +410,7 @@ def _main_impl(test_dir: Path, results_dir: Path, log_path: Path):
     all_models = list_available_models()
     c_datasets = sorted(d for d in all_models if d.startswith("c"))
     t_datasets = sorted(d for d in all_models if d.startswith("T"))
-    datasets = c_datasets + t_datasets
+    datasets = t_datasets + c_datasets
     time_limit = float(ALGORITHM.get("time_limit", 1000))
     total_tasks = len(datasets) * len(MODEL_VARIANTS) * len(ALGORITHM_TYPES) * NUM_RUNS
 
@@ -418,7 +418,7 @@ def _main_impl(test_dir: Path, results_dir: Path, log_path: Path):
     print(f"[{_ts()}] Лог: {log_path}")
     print(f"[{_ts()}] Типы: {', '.join(ALGORITHM_TYPES)}")
     print(f"[{_ts()}] Модели: {', '.join(MODEL_VARIANTS.keys())}")
-    print(f"[{_ts()}] Датасетов: {len(datasets)} (c + T), по {NUM_RUNS} запусков на тип")
+    print(f"[{_ts()}] Датасетов: {len(datasets)} (T + c), по {NUM_RUNS} запусков на тип")
     print(f"[{_ts()}] Итераций: {ITERATIONS}, популяция: {POPULATION_SIZE}, лимит времени: {time_limit} с")
     print(f"[{_ts()}] Параллельных воркеров: {NUM_WORKERS}")
     print(f"[{_ts()}] Всего задач: {total_tasks}")
